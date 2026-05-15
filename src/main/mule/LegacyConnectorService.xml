@@ -33,15 +33,30 @@
             <ee:message>
                 <ee:set-payload><![CDATA[%dw 2.0
 output application/java
-ns soap http://schemas.xmlsoap.org/soap/envelope
+ns ns0 http://mtis.ua.es/elearning/legacy
 ---
 {
-    body: {
-        soap#Fault: {
-            faultcode: "soap:Server",
-            faultstring: "Operation [getExternalContents:\soapkit-config] not implemented"
-        }
-    } write "application/xml"
+    ns0#getExternalContentsResponse: {
+        ns0#sourceSystem: "legacy-lms",
+        ns0#contents: [
+            {
+                ns0#externalContentId: "LEG-001",
+                ns0#title: "Fundamentos XML",
+                ns0#description: "Contenido importado desde repositorio legacy",
+                ns0#category: "Legacy",
+                ns0#lastModified: "2026-05-15T10:00:00",
+                ns0#checksum: "chk-leg-001"
+            },
+            {
+                ns0#externalContentId: "LEG-002",
+                ns0#title: "SOAP avanzado",
+                ns0#description: "Metadatos publicados por sistema heredado",
+                ns0#category: "Legacy",
+                ns0#lastModified: "2026-05-15T10:05:00",
+                ns0#checksum: "chk-leg-002"
+            }
+        ]
+    }
 }]]></ee:set-payload>
             </ee:message>
         </ee:transform>
@@ -51,15 +66,41 @@ ns soap http://schemas.xmlsoap.org/soap/envelope
             <ee:message>
                 <ee:set-payload><![CDATA[%dw 2.0
 output application/java
-ns soap http://schemas.xmlsoap.org/soap/envelope
+ns ns0 http://mtis.ua.es/elearning/legacy
 ---
 {
-    body: {
-        soap#Fault: {
-            faultcode: "soap:Server",
-            faultstring: "Operation [synchronizeContents:\soapkit-config] not implemented"
+    ns0#synchronizeContentsResponse: {
+        ns0#syncId: "sync-" ++ uuid(),
+        ns0#status: "SUCCESS",
+        ns0#processedItems: 2,
+        ns0#updatedItems: 2,
+        ns0#failedItems: 0,
+        ns0#startedAt: "2026-05-15T10:00:00",
+        ns0#finishedAt: "2026-05-15T10:00:03",
+        ns0#message: "Sincronizacion simulada con repositorio legacy completada"
+    }
+}]]></ee:set-payload>
+            </ee:message>
+        </ee:transform>
+    </flow>
+    <flow name="consultContentMetadata:\soapkit-config">
+        <ee:transform>
+            <ee:message>
+                <ee:set-payload><![CDATA[%dw 2.0
+output application/java
+ns ns0 http://mtis.ua.es/elearning/legacy
+---
+{
+    ns0#consultContentMetadataResponse: {
+        ns0#metadata: {
+            ns0#externalContentId: "LEG-001",
+            ns0#title: "Fundamentos XML",
+            ns0#description: "Metadatos de contenido externo heredado",
+            ns0#category: "Legacy",
+            ns0#lastModified: "2026-05-15T10:05:00",
+            ns0#checksum: "chk-leg-001"
         }
-    } write "application/xml"
+    }
 }]]></ee:set-payload>
             </ee:message>
         </ee:transform>

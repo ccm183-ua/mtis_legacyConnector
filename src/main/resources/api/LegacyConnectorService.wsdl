@@ -82,6 +82,23 @@
           </xs:sequence>
         </xs:complexType>
       </xs:element>
+
+      <xs:element name="consultContentMetadataRequest">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="sourceSystem" type="xs:string"/>
+            <xs:element name="externalContentId" type="xs:string"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+
+      <xs:element name="consultContentMetadataResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="metadata" type="tns:ExternalContentMetadataType"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
     </xs:schema>
   </wsdl:types>
 
@@ -101,6 +118,14 @@
     <wsdl:part name="parameters" element="tns:synchronizeContentsResponse"/>
   </wsdl:message>
 
+  <wsdl:message name="ConsultContentMetadataInput">
+    <wsdl:part name="parameters" element="tns:consultContentMetadataRequest"/>
+  </wsdl:message>
+
+  <wsdl:message name="ConsultContentMetadataOutput">
+    <wsdl:part name="parameters" element="tns:consultContentMetadataResponse"/>
+  </wsdl:message>
+
   <wsdl:message name="ServiceFaultMessage">
     <wsdl:part name="fault" element="tns:ServiceFault"/>
   </wsdl:message>
@@ -115,6 +140,12 @@
     <wsdl:operation name="synchronizeContents">
       <wsdl:input message="tns:SynchronizeContentsInput"/>
       <wsdl:output message="tns:SynchronizeContentsOutput"/>
+      <wsdl:fault name="ServiceFault" message="tns:ServiceFaultMessage"/>
+    </wsdl:operation>
+
+    <wsdl:operation name="consultContentMetadata">
+      <wsdl:input message="tns:ConsultContentMetadataInput"/>
+      <wsdl:output message="tns:ConsultContentMetadataOutput"/>
       <wsdl:fault name="ServiceFault" message="tns:ServiceFaultMessage"/>
     </wsdl:operation>
   </wsdl:portType>
@@ -137,6 +168,19 @@
 
     <wsdl:operation name="synchronizeContents">
       <soap:operation soapAction="http://mtis.ua.es/elearning/legacy/synchronizeContents"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="ServiceFault">
+        <soap:fault name="ServiceFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+
+    <wsdl:operation name="consultContentMetadata">
+      <soap:operation soapAction="http://mtis.ua.es/elearning/legacy/consultContentMetadata"/>
       <wsdl:input>
         <soap:body use="literal"/>
       </wsdl:input>
