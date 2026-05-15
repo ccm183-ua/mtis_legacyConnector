@@ -1,0 +1,176 @@
+{
+  "info": {
+    "_postman_id": "393b390c-b906-40b6-b3b2-02eb8b0d9c55",
+    "name": "LegacyConnectorService - MTIS",
+    "description": "Pruebas Postman para las tres operaciones SOAP del LegacyConnectorService.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8081"
+    },
+    {
+      "key": "legacyEndpoint",
+      "value": "{{baseUrl}}/LegacyConnectorService/LegacyConnectorPort"
+    }
+  ],
+  "item": [
+    {
+      "name": "ObtenerContenidosExternos",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('HTTP 200', function () {",
+              "  pm.response.to.have.status(200);",
+              "});",
+              "",
+              "const body = pm.response.text();",
+              "",
+              "pm.test('Respuesta SOAP sin Fault', function () {",
+              "  pm.expect(body).to.include('Envelope');",
+              "  pm.expect(body).to.not.include('Fault');",
+              "});",
+              "",
+              "pm.test('Devuelve contenidos externos', function () {",
+              "  pm.expect(body).to.include('ObtenerContenidosExternosResponse');",
+              "  pm.expect(body).to.include('LEG-001');",
+              "});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "text/xml; charset=utf-8"
+          },
+          {
+            "key": "SOAPAction",
+            "value": "http://mtis.ua.es/elearning/legacy/ObtenerContenidosExternos"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:leg=\"http://mtis.ua.es/elearning/legacy\">\n  <soapenv:Header/>\n  <soapenv:Body>\n    <leg:ObtenerContenidosExternosRequest>\n      <leg:sourceSystem>legacy-lms</leg:sourceSystem>\n    </leg:ObtenerContenidosExternosRequest>\n  </soapenv:Body>\n</soapenv:Envelope>"
+        },
+        "url": {
+          "raw": "{{legacyEndpoint}}",
+          "host": [
+            "{{legacyEndpoint}}"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "SincronizarDatosRepositorio",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('HTTP 200', function () {",
+              "  pm.response.to.have.status(200);",
+              "});",
+              "",
+              "const body = pm.response.text();",
+              "",
+              "pm.test('Respuesta SOAP sin Fault', function () {",
+              "  pm.expect(body).to.include('Envelope');",
+              "  pm.expect(body).to.not.include('Fault');",
+              "});",
+              "",
+              "pm.test('Sincronizacion completada', function () {",
+              "  pm.expect(body).to.include('SincronizarDatosRepositorioResponse');",
+              "  pm.expect(body).to.include('SUCCESS');",
+              "});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "text/xml; charset=utf-8"
+          },
+          {
+            "key": "SOAPAction",
+            "value": "http://mtis.ua.es/elearning/legacy/SincronizarDatosRepositorio"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:leg=\"http://mtis.ua.es/elearning/legacy\">\n  <soapenv:Header/>\n  <soapenv:Body>\n    <leg:SincronizarDatosRepositorioRequest>\n      <leg:sourceSystem>legacy-lms</leg:sourceSystem>\n      <leg:catalogId>catalog-demo</leg:catalogId>\n      <leg:requestedBy>postman</leg:requestedBy>\n      <leg:requestId>REQ-POSTMAN-001</leg:requestId>\n    </leg:SincronizarDatosRepositorioRequest>\n  </soapenv:Body>\n</soapenv:Envelope>"
+        },
+        "url": {
+          "raw": "{{legacyEndpoint}}",
+          "host": [
+            "{{legacyEndpoint}}"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "ConsultarMetadatosContenido",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('HTTP 200', function () {",
+              "  pm.response.to.have.status(200);",
+              "});",
+              "",
+              "const body = pm.response.text();",
+              "",
+              "pm.test('Respuesta SOAP sin Fault', function () {",
+              "  pm.expect(body).to.include('Envelope');",
+              "  pm.expect(body).to.not.include('Fault');",
+              "});",
+              "",
+              "pm.test('Devuelve metadatos del contenido', function () {",
+              "  pm.expect(body).to.include('ConsultarMetadatosContenidoResponse');",
+              "  pm.expect(body).to.include('LEG-001');",
+              "});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "text/xml; charset=utf-8"
+          },
+          {
+            "key": "SOAPAction",
+            "value": "http://mtis.ua.es/elearning/legacy/ConsultarMetadatosContenido"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:leg=\"http://mtis.ua.es/elearning/legacy\">\n  <soapenv:Header/>\n  <soapenv:Body>\n    <leg:ConsultarMetadatosContenidoRequest>\n      <leg:sourceSystem>legacy-lms</leg:sourceSystem>\n      <leg:externalContentId>LEG-001</leg:externalContentId>\n    </leg:ConsultarMetadatosContenidoRequest>\n  </soapenv:Body>\n</soapenv:Envelope>"
+        },
+        "url": {
+          "raw": "{{legacyEndpoint}}",
+          "host": [
+            "{{legacyEndpoint}}"
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}
