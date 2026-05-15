@@ -3,7 +3,7 @@
     <http:listener-config name="api-httpListenerConfig">
         <http:listener-connection host="0.0.0.0" port="8081"/>
     </http:listener-config>
-    <apikit-soap:config httpStatusVarName="httpStatus" name="soapkit-config" port="LegacyConnectorPort" service="LegacyConnectorService" wsdlLocation="LegacyConnectorService.wsdl"/>
+    <apikit-soap:config httpStatusVarName="httpStatus" name="soapkit-config" port="LegacyConnectorPort" service="LegacyConnectorService" wsdlLocation="api/LegacyConnectorService.wsdl"/>
     <flow name="api-main">
         <http:listener config-ref="api-httpListenerConfig" path="/LegacyConnectorService/LegacyConnectorPort">
             <http:response statusCode="#[attributes.additionalTransportData.statusCode default 200]">
