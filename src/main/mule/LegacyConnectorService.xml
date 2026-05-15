@@ -28,7 +28,7 @@
             }]</apikit-soap:attributes>
         </apikit-soap:router>
     </flow>
-    <flow name="getExternalContents:\soapkit-config">
+    <flow name="ObtenerContenidosExternos:\soapkit-config">
         <ee:transform>
             <ee:message>
                 <ee:set-payload><![CDATA[%dw 2.0
@@ -36,7 +36,7 @@ output application/java
 ns ns0 http://mtis.ua.es/elearning/legacy
 ---
 {
-    ns0#getExternalContentsResponse: {
+    ns0#ObtenerContenidosExternosResponse: {
         ns0#sourceSystem: "legacy-lms",
         ns0#contents: [
             {
@@ -61,7 +61,7 @@ ns ns0 http://mtis.ua.es/elearning/legacy
             </ee:message>
         </ee:transform>
     </flow>
-    <flow name="synchronizeContents:\soapkit-config">
+    <flow name="SincronizarDatosRepositorio:\soapkit-config">
         <ee:transform>
             <ee:message>
                 <ee:set-payload><![CDATA[%dw 2.0
@@ -69,7 +69,7 @@ output application/java
 ns ns0 http://mtis.ua.es/elearning/legacy
 ---
 {
-    ns0#synchronizeContentsResponse: {
+    ns0#SincronizarDatosRepositorioResponse: {
         ns0#syncId: "sync-" ++ uuid(),
         ns0#status: "SUCCESS",
         ns0#processedItems: 2,
@@ -83,7 +83,7 @@ ns ns0 http://mtis.ua.es/elearning/legacy
             </ee:message>
         </ee:transform>
     </flow>
-    <flow name="consultContentMetadata:\soapkit-config">
+    <flow name="ConsultarMetadatosContenido:\soapkit-config">
         <ee:transform>
             <ee:message>
                 <ee:set-payload><![CDATA[%dw 2.0
@@ -91,7 +91,7 @@ output application/java
 ns ns0 http://mtis.ua.es/elearning/legacy
 ---
 {
-    ns0#consultContentMetadataResponse: {
+    ns0#ConsultarMetadatosContenidoResponse: {
         ns0#metadata: {
             ns0#externalContentId: "LEG-001",
             ns0#title: "Fundamentos XML",
@@ -106,3 +106,4 @@ ns ns0 http://mtis.ua.es/elearning/legacy
         </ee:transform>
     </flow>
 </mule>
+

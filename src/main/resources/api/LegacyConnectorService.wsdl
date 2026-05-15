@@ -38,7 +38,7 @@
         </xs:sequence>
       </xs:complexType>
 
-      <xs:element name="getExternalContentsRequest">
+      <xs:element name="ObtenerContenidosExternosRequest">
         <xs:complexType>
           <xs:sequence>
             <xs:element name="sourceSystem" type="xs:string"/>
@@ -48,7 +48,7 @@
         </xs:complexType>
       </xs:element>
 
-      <xs:element name="getExternalContentsResponse">
+      <xs:element name="ObtenerContenidosExternosResponse">
         <xs:complexType>
           <xs:sequence>
             <xs:element name="sourceSystem" type="xs:string"/>
@@ -57,7 +57,7 @@
         </xs:complexType>
       </xs:element>
 
-      <xs:element name="synchronizeContentsRequest">
+      <xs:element name="SincronizarDatosRepositorioRequest">
         <xs:complexType>
           <xs:sequence>
             <xs:element name="sourceSystem" type="xs:string"/>
@@ -68,7 +68,7 @@
         </xs:complexType>
       </xs:element>
 
-      <xs:element name="synchronizeContentsResponse">
+      <xs:element name="SincronizarDatosRepositorioResponse">
         <xs:complexType>
           <xs:sequence>
             <xs:element name="syncId" type="xs:string"/>
@@ -83,7 +83,7 @@
         </xs:complexType>
       </xs:element>
 
-      <xs:element name="consultContentMetadataRequest">
+      <xs:element name="ConsultarMetadatosContenidoRequest">
         <xs:complexType>
           <xs:sequence>
             <xs:element name="sourceSystem" type="xs:string"/>
@@ -92,7 +92,7 @@
         </xs:complexType>
       </xs:element>
 
-      <xs:element name="consultContentMetadataResponse">
+      <xs:element name="ConsultarMetadatosContenidoResponse">
         <xs:complexType>
           <xs:sequence>
             <xs:element name="metadata" type="tns:ExternalContentMetadataType"/>
@@ -102,28 +102,28 @@
     </xs:schema>
   </wsdl:types>
 
-  <wsdl:message name="GetExternalContentsInput">
-    <wsdl:part name="parameters" element="tns:getExternalContentsRequest"/>
+  <wsdl:message name="ObtenerContenidosExternosInput">
+    <wsdl:part name="parameters" element="tns:ObtenerContenidosExternosRequest"/>
   </wsdl:message>
 
-  <wsdl:message name="GetExternalContentsOutput">
-    <wsdl:part name="parameters" element="tns:getExternalContentsResponse"/>
+  <wsdl:message name="ObtenerContenidosExternosOutput">
+    <wsdl:part name="parameters" element="tns:ObtenerContenidosExternosResponse"/>
   </wsdl:message>
 
-  <wsdl:message name="SynchronizeContentsInput">
-    <wsdl:part name="parameters" element="tns:synchronizeContentsRequest"/>
+  <wsdl:message name="SincronizarDatosRepositorioInput">
+    <wsdl:part name="parameters" element="tns:SincronizarDatosRepositorioRequest"/>
   </wsdl:message>
 
-  <wsdl:message name="SynchronizeContentsOutput">
-    <wsdl:part name="parameters" element="tns:synchronizeContentsResponse"/>
+  <wsdl:message name="SincronizarDatosRepositorioOutput">
+    <wsdl:part name="parameters" element="tns:SincronizarDatosRepositorioResponse"/>
   </wsdl:message>
 
-  <wsdl:message name="ConsultContentMetadataInput">
-    <wsdl:part name="parameters" element="tns:consultContentMetadataRequest"/>
+  <wsdl:message name="ConsultarMetadatosContenidoInput">
+    <wsdl:part name="parameters" element="tns:ConsultarMetadatosContenidoRequest"/>
   </wsdl:message>
 
-  <wsdl:message name="ConsultContentMetadataOutput">
-    <wsdl:part name="parameters" element="tns:consultContentMetadataResponse"/>
+  <wsdl:message name="ConsultarMetadatosContenidoOutput">
+    <wsdl:part name="parameters" element="tns:ConsultarMetadatosContenidoResponse"/>
   </wsdl:message>
 
   <wsdl:message name="ServiceFaultMessage">
@@ -131,21 +131,21 @@
   </wsdl:message>
 
   <wsdl:portType name="LegacyConnectorPortType">
-    <wsdl:operation name="getExternalContents">
-      <wsdl:input message="tns:GetExternalContentsInput"/>
-      <wsdl:output message="tns:GetExternalContentsOutput"/>
+    <wsdl:operation name="ObtenerContenidosExternos">
+      <wsdl:input message="tns:ObtenerContenidosExternosInput"/>
+      <wsdl:output message="tns:ObtenerContenidosExternosOutput"/>
       <wsdl:fault name="ServiceFault" message="tns:ServiceFaultMessage"/>
     </wsdl:operation>
 
-    <wsdl:operation name="synchronizeContents">
-      <wsdl:input message="tns:SynchronizeContentsInput"/>
-      <wsdl:output message="tns:SynchronizeContentsOutput"/>
+    <wsdl:operation name="SincronizarDatosRepositorio">
+      <wsdl:input message="tns:SincronizarDatosRepositorioInput"/>
+      <wsdl:output message="tns:SincronizarDatosRepositorioOutput"/>
       <wsdl:fault name="ServiceFault" message="tns:ServiceFaultMessage"/>
     </wsdl:operation>
 
-    <wsdl:operation name="consultContentMetadata">
-      <wsdl:input message="tns:ConsultContentMetadataInput"/>
-      <wsdl:output message="tns:ConsultContentMetadataOutput"/>
+    <wsdl:operation name="ConsultarMetadatosContenido">
+      <wsdl:input message="tns:ConsultarMetadatosContenidoInput"/>
+      <wsdl:output message="tns:ConsultarMetadatosContenidoOutput"/>
       <wsdl:fault name="ServiceFault" message="tns:ServiceFaultMessage"/>
     </wsdl:operation>
   </wsdl:portType>
@@ -153,8 +153,8 @@
   <wsdl:binding name="LegacyConnectorBinding" type="tns:LegacyConnectorPortType">
     <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
 
-    <wsdl:operation name="getExternalContents">
-      <soap:operation soapAction="http://mtis.ua.es/elearning/legacy/getExternalContents"/>
+    <wsdl:operation name="ObtenerContenidosExternos">
+      <soap:operation soapAction="http://mtis.ua.es/elearning/legacy/ObtenerContenidosExternos"/>
       <wsdl:input>
         <soap:body use="literal"/>
       </wsdl:input>
@@ -166,8 +166,8 @@
       </wsdl:fault>
     </wsdl:operation>
 
-    <wsdl:operation name="synchronizeContents">
-      <soap:operation soapAction="http://mtis.ua.es/elearning/legacy/synchronizeContents"/>
+    <wsdl:operation name="SincronizarDatosRepositorio">
+      <soap:operation soapAction="http://mtis.ua.es/elearning/legacy/SincronizarDatosRepositorio"/>
       <wsdl:input>
         <soap:body use="literal"/>
       </wsdl:input>
@@ -179,8 +179,8 @@
       </wsdl:fault>
     </wsdl:operation>
 
-    <wsdl:operation name="consultContentMetadata">
-      <soap:operation soapAction="http://mtis.ua.es/elearning/legacy/consultContentMetadata"/>
+    <wsdl:operation name="ConsultarMetadatosContenido">
+      <soap:operation soapAction="http://mtis.ua.es/elearning/legacy/ConsultarMetadatosContenido"/>
       <wsdl:input>
         <soap:body use="literal"/>
       </wsdl:input>
@@ -195,8 +195,9 @@
 
   <wsdl:service name="LegacyConnectorService">
     <wsdl:port name="LegacyConnectorPort" binding="tns:LegacyConnectorBinding">
-      <soap:address location="http://localhost:8080/axis2/services/LegacyConnectorService"/>
+      <soap:address location="http://localhost:8081/LegacyConnectorService/LegacyConnectorPort"/>
     </wsdl:port>
   </wsdl:service>
 
 </wsdl:definitions>
+
